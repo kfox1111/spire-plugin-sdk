@@ -11,6 +11,8 @@ service WorkloadAttestor {
 message AttestReferenceRequest {
     // Required. Reference to the workload to be attested.
     google.protobuf.Any reference = 1;
+    // Additional, already validated selectors
+    repeated string selector_values = 2;
 }
 
 message AttestReferenceResponse {

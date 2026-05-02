@@ -25,9 +25,11 @@ const (
 type AttestReferenceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Required. Reference to the workload to be attested.
-	Reference     *anypb.Any `protobuf:"bytes,1,opt,name=reference,proto3" json:"reference,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Reference *anypb.Any `protobuf:"bytes,1,opt,name=reference,proto3" json:"reference,omitempty"`
+	// Additional, already validated selectors
+	SelectorValues []string `protobuf:"bytes,2,rep,name=selector_values,json=selectorValues,proto3" json:"selector_values,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *AttestReferenceRequest) Reset() {
@@ -63,6 +65,13 @@ func (*AttestReferenceRequest) Descriptor() ([]byte, []int) {
 func (x *AttestReferenceRequest) GetReference() *anypb.Any {
 	if x != nil {
 		return x.Reference
+	}
+	return nil
+}
+
+func (x *AttestReferenceRequest) GetSelectorValues() []string {
+	if x != nil {
+		return x.SelectorValues
 	}
 	return nil
 }
@@ -117,9 +126,10 @@ var File_spire_plugin_agent_workloadattestor_v2_workloadattestor_proto protorefl
 
 const file_spire_plugin_agent_workloadattestor_v2_workloadattestor_proto_rawDesc = "" +
 	"\n" +
-	"=spire/plugin/agent/workloadattestor/v2/workloadattestor.proto\x12&spire.plugin.agent.workloadattestor.v2\x1a\x19google/protobuf/any.proto\"L\n" +
+	"=spire/plugin/agent/workloadattestor/v2/workloadattestor.proto\x12&spire.plugin.agent.workloadattestor.v2\x1a\x19google/protobuf/any.proto\"u\n" +
 	"\x16AttestReferenceRequest\x122\n" +
-	"\treference\x18\x01 \x01(\v2\x14.google.protobuf.AnyR\treference\"B\n" +
+	"\treference\x18\x01 \x01(\v2\x14.google.protobuf.AnyR\treference\x12'\n" +
+	"\x0fselector_values\x18\x02 \x03(\tR\x0eselectorValues\"B\n" +
 	"\x17AttestReferenceResponse\x12'\n" +
 	"\x0fselector_values\x18\x01 \x03(\tR\x0eselectorValues2\xa7\x01\n" +
 	"\x10WorkloadAttestor\x12\x92\x01\n" +
